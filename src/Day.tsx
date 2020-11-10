@@ -14,7 +14,6 @@ const Day: React.FC<DayProps> = ({ day }) => {
   }
 
   const handleClick =(event:React.MouseEvent<HTMLElement>)=> {
-   console.log("set active day");
     setActiveDay(day);
   }
   return (
