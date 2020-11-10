@@ -4,16 +4,17 @@ import { PieChart } from "react-minimal-pie-chart";
 import svLocale from "date-fns/locale/sv";
 import { eachMonthOfInterval, format } from "date-fns";
 import DayDetails from './DayDetails';
-import {Context} from './Context';
+import { Context, DayEvent } from './Context';
 
 const Calendar: React.FC = () => {
 
   const [activeMonth, setActiveMonth] = useState(-1);
   const [activeDay, setActiveDay] = useState<Date | undefined>();
+  const [activeEvents, setActiveEvents] = useState<DayEvent[] | undefined>();
+
   const [events, setEvents] = useState([]);
   const getAllEvents = async()=>{
     const result = await fetch("http://localhost:3001/events");
-
     const data = await result.json();
     console.log(data);
     setEvents(data);
@@ -41,12 +42,13 @@ const Calendar: React.FC = () => {
   }, []);
 
   return (
-    <Context.Provider value={{activeDay, setActiveDay, events}}>
+    <Context.Provider value={{activeDay, setActiveDay, events, setActiveEvents, activeEvents}}>
 
 {/* Så länge activeDay inte är false, undefined, null, 0, "" så kommer det efter && att göras */}
-      {activeDay && <DayDetails day={activeDay} />} 
+      {activeDay && <DayDetails day={activeDay} eventsForToday={activeEvents}/>} 
 
       {activeMonth > -1 && <Month month={months[activeMonth]} />}
+
       <PieChart
         data={monthArray}
         paddingAngle={2}

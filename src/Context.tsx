@@ -1,6 +1,6 @@
 import {createContext, Dispatch,SetStateAction } from 'react';
 
-export interface Event{
+export interface DayEvent{
     title:string;
     description?:string;
     tags:string[];
@@ -11,9 +11,12 @@ export interface Event{
 interface ContextProps {
     setActiveDay: Dispatch<SetStateAction<Date | undefined>>;
     activeDay?: Date;
-    events?: Event[];
+    events?: DayEvent[];
+    setActiveEvents: Dispatch<SetStateAction<DayEvent[] | undefined>>;
+    activeEvents?: DayEvent[];
 }
 
 export const Context = createContext<ContextProps>({
     setActiveDay:()=>null,
+    setActiveEvents:()=>null
 });

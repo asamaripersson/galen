@@ -1,7 +1,16 @@
 .week {
   background-color: aqua;
 }
-
+.JAS {
+  color: #f00;
+}
+.Odling {
+  color: green;
+}
+.day-details {
+  border: brown;
+  border-style: groove;
+}
 .day {
   border-style: solid;
 }
