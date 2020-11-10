@@ -1,0 +1,19 @@
+{
+    "events":
+    [
+        {
+            "title": "sätt sallad",
+            "description":"", 
+            "tags":["JAS","Odling"], 
+            "startDate": "2020-07-20",
+            "endDate": "2020-07-21"
+        },
+        {
+            "title": "plantera lök",
+            "description":"gul, vit å röd i ", 
+            "tags":["JAS","Odling"], 
+            "startDate": "2020-09-11",
+            "endDate": "2020-09-11"
+        }
+    ]
+}

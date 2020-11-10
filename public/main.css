@@ -1,0 +1,17 @@
+.week {
+  background-color: aqua;
+}
+
+.day {
+  border-style: solid;
+}
+.day-number {
+  font-weight: 700;
+  text-align: center;
+}
+.event-in-day {
+  cursor: pointer;
+}
+.weekend-day {
+  color: #f00;
+}
