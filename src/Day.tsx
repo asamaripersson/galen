@@ -21,14 +21,14 @@ const Day: React.FC<DayProps> = ({ day }) => {
     return null;
   }
 
-  const handleClick =(event:React.MouseEvent<HTMLElement>)=> {
+  const handleClick =(event:React.MouseEvent<HTMLDivElement>)=> {
     setActiveDay(day);
     setActiveEvents(filteredEvents);
   }
   return (
     <>
-      <td className="day">
-        <DayButton day={day} eventsOfDay={filteredEvents} onClick={handleClick}></DayButton>
+      <td key={day.toString()} className="day">
+        <DayButton key={day.getMilliseconds().toString()} day={day} eventsOfDay={filteredEvents} onClick={handleClick}></DayButton>
       </td>
     </>
   );

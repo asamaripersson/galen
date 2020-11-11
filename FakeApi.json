@@ -1,19 +1,26 @@
 {
-    "events":
-    [
-        {
-            "title": "sätt sallad",
-            "description":"", 
-            "tags":["JAS"], 
-            "startDate": "2020-7-20",
-            "endDate": "2020-7-21"
-        },
-        {
-            "title": "plantera lök",
-            "description":"gul, vit å röd i ", 
-            "tags":["JAS","Odling"], 
-            "startDate": "2020-09-11",
-            "endDate": "2020-09-11"
-        }
-    ]
+  "events": [
+    {
+      "id": "2",
+      "title": "Plocka upp lök",
+      "description": "glöm ej de på baksidan",
+      "tags": [
+        "JAS",
+        "harvest"
+      ],
+      "startDate": "2020-09-01",
+      "endDate": "2020-09-30"
+    },
+    {
+      "id": "3",
+      "title": "Plocka potatis",
+      "description": "ba gört!",
+      "tags": [
+        "JAS",
+        "harvest"
+      ],
+      "startDate": "2020-09-11",
+      "endDate": "2020-09-11"
+    }
+  ]
 }

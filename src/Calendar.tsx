@@ -16,9 +16,9 @@ const Calendar: React.FC = () => {
   const getAllEvents = async()=>{
     const result = await fetch("http://localhost:3001/events");
     const data = await result.json();
-    console.log(data);
     setEvents(data);
   }
+
 
   const months = eachMonthOfInterval({
     start: new Date(2020, 0, 1),//första januari detta år
@@ -33,6 +33,7 @@ const Calendar: React.FC = () => {
 
   const onClick = (_: React.MouseEvent, index: number) => {
     setActiveMonth(index);
+    setActiveDay(null);
   };
 
 // useEffect ser till att vi bara kör getAllEvents såfort nån dependencys har uppdaterats

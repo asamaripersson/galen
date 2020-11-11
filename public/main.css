@@ -4,8 +4,16 @@
 .JAS {
   color: #f00;
 }
-.Odling {
+.harvest {
+  color: burlywood;
+}
+.plant {
   color: green;
+}
+.event-details {
+  border: brown;
+  border-style: groove;
+  width: 300px;
 }
 .day-details {
   border: brown;
