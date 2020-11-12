@@ -1,7 +1,7 @@
 import React, { useContext  } from "react";
 import svLocale from "date-fns/locale/sv";
 import { format } from "date-fns";
-import { DayEvent } from './Context';
+import { DayEvent, Context } from './Context';
 
 interface DayButtonPropps {
     day:Date;
@@ -10,20 +10,18 @@ interface DayButtonPropps {
 }
 const DayButton: React.FC<DayButtonPropps> = ({ day, eventsOfDay, ...rest }) => {
 
-  const deleteEvent = async(id:string)=>{
-    
-    const result = await fetch("http://localhost:3001/events/"+id,
-    {method:"DELETE"});
-    const data = await result.json();
-    console.log("deleted? ", data);
-    //setEvents(data); add to context
-  }
+const {deleteEvent} = useContext(Context);
 
   const handleRemoveEventClick =(event:React.MouseEvent<HTMLElement>)=> {
-    console.log("remove event click in daybutton ", (event.target as HTMLInputElement).value);
     deleteEvent((event.target as HTMLInputElement).value);
   }
-    const numberOfDay = format(day, "dd", { locale: svLocale });
+
+  const handleAddEventClick =(event:React.MouseEvent<HTMLElement>)=> {
+    console.log("handleAddEventClick");
+    //setState: AddEventForm
+   //FLYTTA?  addEvent((event.target as HTMLInputElement).value);
+  }
+  const numberOfDay = format(day, "dd", { locale: svLocale });
 
 return <>
     <div {...rest}>

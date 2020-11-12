@@ -1,17 +1,6 @@
 {
   "events": [
     {
-      "id": "2",
-      "title": "Plocka upp lök",
-      "description": "glöm ej de på baksidan",
-      "tags": [
-        "JAS",
-        "harvest"
-      ],
-      "startDate": "2020-09-01",
-      "endDate": "2020-09-30"
-    },
-    {
       "id": "3",
       "title": "Plocka potatis",
       "description": "ba gört!",
@@ -21,6 +10,37 @@
       ],
       "startDate": "2020-09-11",
       "endDate": "2020-09-11"
+    },
+    {
+      "id": "36",
+      "title": "Plocka test",
+      "description": "ba test!",
+      "tags": [
+        "JAS",
+        "harvest"
+      ],
+      "startDate": "2020-06-11",
+      "endDate": "2020-09-11"
+    },
+    {
+      "id": "22",
+      "startDate": "2020-09-08",
+      "endDate": "2020-09-08",
+      "title": "ok",
+      "description": "hilfe",
+      "tags": [
+        "plant"
+      ]
+    },
+    {
+      "startDate": "2020-09-06",
+      "endDate": "2020-09-06",
+      "title": "plocka äpplen",
+      "description": "ba gört",
+      "tags": [
+        "harvest"
+      ],
+      "id": "bK9DOiE"
     }
   ]
 }

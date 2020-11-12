@@ -1,23 +1,30 @@
-import React, { useState, Component, MouseEvent  } from "react";
+import React, { useContext  } from "react";
 import svLocale from "date-fns/locale/sv";
 import { format } from "date-fns";
-import { DayEvent } from "./Context";
+import { DayEvent, Context } from "./Context";
 
 interface DayDetailsPropps {
     day:Date;
     eventsForToday:DayEvent[]
 }
+
 const DayDetails: React.FC<DayDetailsPropps> = ({ day, eventsForToday }) => {
+
+    const {deleteEvent, setAddEvent} = useContext(Context);
     const handleRemoveEventClick =(event:React.MouseEvent<HTMLElement>)=> {
-        console.log("remove event click in daydetails");
+        deleteEvent((event.target as HTMLInputElement).value);
       }
 
+      const handleAddEventClick =(event:React.MouseEvent<HTMLElement>)=> {
+        setAddEvent(true);
+      }
+ 
     const dateOfDay = format(day, "dd MMMM yyyy", { locale: svLocale });
     const nameOfDay = format(day, "EEEE", {locale:svLocale});
     return <>
         <div className="day-details" >
             <h2 className="day-number">{nameOfDay} {dateOfDay}</h2>
-            <button className="add-event">&#43;</button>
+            <button className="add-event" onClick={handleAddEventClick}>&#43;</button>
 
             {eventsForToday?.map((dayEvent)=>{
                 return <>

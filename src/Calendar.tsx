@@ -5,20 +5,40 @@ import svLocale from "date-fns/locale/sv";
 import { eachMonthOfInterval, format } from "date-fns";
 import DayDetails from './DayDetails';
 import { Context, DayEvent } from './Context';
+import AddEventForm from './AddEventForm';
+// import { getAllEvents } from './event-service';
 
 const Calendar: React.FC = () => {
 
   const [activeMonth, setActiveMonth] = useState(-1);
   const [activeDay, setActiveDay] = useState<Date | undefined>();
   const [activeEvents, setActiveEvents] = useState<DayEvent[] | undefined>();
+  const [addEvent, setAddEvent] = useState(false);
 
   const [events, setEvents] = useState([]);
   const getAllEvents = async()=>{
     const result = await fetch("http://localhost:3001/events");
     const data = await result.json();
+    console.log("calendar - getall events", data);
     setEvents(data);
   }
-
+  const deleteEvent = async(id:string)=>{
+    const result = await fetch("http://localhost:3001/events/"+id,
+    {method:"DELETE"});
+    const data = await result.json();
+    console.log("deleted? ", data);
+    getAllEvents();
+  }
+  const addEventToDb = async(d:FormData)=>{
+    const result = await fetch("http://localhost:3001/events/",
+    {
+      method:"POST",
+      body:JSON.stringify(d),
+      headers:{"Content-Type": "application/json"}
+    });
+    const data = await result.json();
+    getAllEvents();
+  }
 
   const months = eachMonthOfInterval({
     start: new Date(2020, 0, 1),//första januari detta år
@@ -43,10 +63,11 @@ const Calendar: React.FC = () => {
   }, []);
 
   return (
-    <Context.Provider value={{activeDay, setActiveDay, events, setActiveEvents, activeEvents}}>
+    <Context.Provider value={{deleteEvent, activeDay, setActiveDay, events, setEvents,setActiveEvents, activeEvents, addEvent, setAddEvent, addEventToDb}}>
 
 {/* Så länge activeDay inte är false, undefined, null, 0, "" så kommer det efter && att göras */}
       {activeDay && <DayDetails day={activeDay} eventsForToday={activeEvents}/>} 
+      {activeDay && addEvent && <AddEventForm day={activeDay}/>} 
 
       {activeMonth > -1 && <Month month={months[activeMonth]} />}
 
