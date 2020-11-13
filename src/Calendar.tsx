@@ -6,14 +6,14 @@ import { eachMonthOfInterval, format } from "date-fns";
 import DayDetails from './DayDetails';
 import { Context, DayEvent } from './Context';
 import AddEventForm from './AddEventForm';
-// import { getAllEvents } from './event-service';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 const Calendar: React.FC = () => {
 
   const [activeMonth, setActiveMonth] = useState(-1);
   const [activeDay, setActiveDay] = useState<Date | undefined>();
-  const [activeEvents, setActiveEvents] = useState<DayEvent[] | undefined>();
-  const [addEvent, setAddEvent] = useState(false);
+  const [showAddDayEvent, setShowAddDayEvent] = useState(false);
 
   const [events, setEvents] = useState([]);
   const getAllEvents = async()=>{
@@ -46,9 +46,9 @@ const Calendar: React.FC = () => {
   });
 
   const monthArray = months.map((month) => ({
-    title: format(month, "MMMM", { locale: svLocale }),
+    title: format(month, "MMM", { locale: svLocale }),
     value: 1 / 12,
-    color: "#00FF00",
+    color: "#06BA63",
   }));
 
   const onClick = (_: React.MouseEvent, index: number) => {
@@ -63,27 +63,37 @@ const Calendar: React.FC = () => {
   }, []);
 
   return (
-    <Context.Provider value={{deleteEvent, activeDay, setActiveDay, events, setEvents,setActiveEvents, activeEvents, addEvent, setAddEvent, addEventToDb}}>
+    <Context.Provider value={{deleteEvent, activeDay, setActiveDay, events, setEvents, setShowAddDayEvent, showAddDayEvent, addEventToDb}}>
 
 {/* Så länge activeDay inte är false, undefined, null, 0, "" så kommer det efter && att göras */}
-      {activeDay && <DayDetails day={activeDay} eventsForToday={activeEvents}/>} 
-      {activeDay && addEvent && <AddEventForm day={activeDay}/>} 
-
+    <Container>
+      <Row>
       {activeMonth > -1 && <Month month={months[activeMonth]} />}
 
+      {activeDay && <DayDetails day={activeDay}/>} 
+      {activeDay && showAddDayEvent && <AddEventForm day={activeDay}/>} 
+      </Row>
+    <Row>
+      <div className={"year-pie"}>
       <PieChart
+        background="#04703c"
         data={monthArray}
         paddingAngle={2}
         label={(labelProps) => labelProps.dataEntry.title}
         labelPosition={100 / 2}
         labelStyle={{
-          fill: "#fff",
-          opacity: 0.75,
+          fill: "#04703c",
           pointerEvents: "none",
-          fontSize: "2px",
+          fontSize: "4px",
+          fontWeight: "bold"
         }}
         onClick={onClick}
       />
+      </div>
+    
+    </Row>
+
+</Container>
     </Context.Provider>
   );
 };

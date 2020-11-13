@@ -3,6 +3,8 @@ import { format, startOfDay, endOfDay } from "date-fns";
 import svLocale from "date-fns/locale/sv";
 import { useForm } from 'react-hook-form';
 import { Context, DayEvent } from './Context';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 interface AddEventFormProps {
   day?: Date;
@@ -18,34 +20,37 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ day }) => {
 
   const nameOfDay = format(day, "EEEE", {locale:svLocale});
   const { register, handleSubmit } = useForm();
-  const { addEventToDb } = useContext(Context);
+  const { addEventToDb, showAddDayEvent, setShowAddDayEvent } = useContext(Context);
 
   const onSubmit = data => {
-    //alert(JSON.stringify(data));
     addEventToDb(data);
+    setShowAddDayEvent(false);
   };
+  const handleClose = () => setShowAddDayEvent(false);
+
   return (
     <>
-        <h4 className="day-number">Skapa event för {nameOfDay} {dateOfDay}</h4>
-        <form onSubmit={handleSubmit(onSubmit)}>
+     <Modal show={showAddDayEvent} onHide={handleClose}>
+        <Modal.Header closeButton>
+            <Modal.Title>Skapa event för {nameOfDay} {dateOfDay}</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+        <form onSubmit={handleSubmit(onSubmit)} className={"add-event-form"}>
         <div>
-            <label htmlFor="startDate">Från datum</label>
-            <input name="startDate" value={startDate} ref={register} />
+            <input name="startDate" value={startDate} ref={register} hidden/>
         </div>
         <div>
-            <label htmlFor="endDate">Från datum</label>
-            <input name="endDate" value={endDate} ref={register} />
+            <input name="endDate" value={endDate} ref={register} hidden />
         </div>
         <div>
             <label htmlFor="title">Titel</label>
             <input name="title" ref={register} />
         </div>
-
         <div>
           <label htmlFor="description">Beskrivning</label>
           <textarea name="description" ref={register} />
         </div>
-
         <div>
             <p>Välj kategori för eventet</p>     
             <select multiple name="tags" ref={register}>
@@ -54,9 +59,10 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ day }) => {
             </select>
         </div>
 
-
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
         </form>
+        </Modal.Body>
+    </Modal>
     </>
   );
 };
