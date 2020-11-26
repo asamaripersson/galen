@@ -2,7 +2,8 @@ import React from "react";
 import svLocale from "date-fns/locale/sv";
 import { format, lastDayOfMonth, eachWeekOfInterval } from "date-fns";
 import Week from "./Week";
-import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import MonthHeader from './MonthHeader';
 
 interface MonthProps {
   month?: Date;
@@ -21,8 +22,8 @@ const Month: React.FC<MonthProps> = ({ month }) => {
 
   return (
     <>
-    <Col>
-      <h2>{nameOfMonth}</h2>
+    <MonthHeader month={month}></MonthHeader>
+    <Row>
       <table>
         <thead>
           <tr className="weekdays">
@@ -41,7 +42,7 @@ const Month: React.FC<MonthProps> = ({ month }) => {
           ))}
         </tbody>
       </table>
-      </Col>
+      </Row>
     </>
   );
 };

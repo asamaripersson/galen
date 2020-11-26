@@ -13,6 +13,57 @@ textarea,
 select {
   width: 100%;
 }
+
+.no-zone > #dropdown-zone-button {
+  background-color: #06ba63;
+}
+
+.zone-color-1 > #dropdown-zone-button,
+#zone-color-1 {
+  background-color: #d6232e;
+}
+
+.zone-color-2 > #dropdown-zone-button,
+#zone-color-2 {
+  background-color: #de860a;
+}
+
+.zone-color-3 > #dropdown-zone-button,
+#zone-color-3 {
+  background-color: #f6ea52;
+}
+.zone-color-4 > #dropdown-zone-button,
+#zone-color-4 {
+  background-color: #9aaa3a;
+}
+
+.zone-color-5 > #dropdown-zone-button,
+#zone-color-5 {
+  background-color: #4a763a;
+}
+
+.zone-color-6 > #dropdown-zone-button,
+#zone-color-6 {
+  background-color: #6aaaca;
+}
+
+.zone-color-7 > #dropdown-zone-button,
+#zone-color-7 {
+  background-color: #5a5a86;
+}
+
+.zone-color-8 > #dropdown-zone-button,
+#zone-color-8 {
+  background-color: #664a7a;
+}
+
+.zone-color-mountain > #dropdown-zone-button,
+#zone-color-mountain {
+  background-color: #faf6ea;
+}
+.month-tag {
+  padding: 10px;
+}
 .tag {
   display: inline-block;
   max-width: 55px;
@@ -50,8 +101,7 @@ select {
   border-style: groove;
   padding: 0 !important;
 }
-.day-details-inner {
-}
+
 .day {
   border-style: solid;
   width: 80px;
@@ -80,6 +130,9 @@ select {
   position: absolute;
   top: 10px;
   right: 10px;
+  /* background:    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-x-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+</svg>; */
 }
 .day .event-title {
   font-size: 9px;
