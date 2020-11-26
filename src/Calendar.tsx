@@ -88,33 +88,32 @@ const Calendar: React.FC = () => {
     setActiveZoneButtonText("Vald zon: "+event);
     setActiveZone(event);//TODO rätt?
 }
-  return (
-    <Context.Provider value={{monthEvents, setMonthEvents, activeZone, setActiveZone, deleteEvent, activeDay, setActiveDay, events, setEvents, setShowAddDayEvent, showAddDayEvent, addEventToDb}}>
-      <Container>
-        <Row>
-            <DropdownButton onSelect={handleZoneClick} id="dropdown-zone-button" className={activeZoneClass} title={activeZoneButtonText}>
+return (
+<Context.Provider value={{monthEvents, setMonthEvents, activeZone, setActiveZone, deleteEvent, activeDay, setActiveDay, events, setEvents, setShowAddDayEvent, showAddDayEvent, addEventToDb}}>
+  <Container>
+    <Row>
+        <DropdownButton onSelect={handleZoneClick} id="dropdown-zone-button" className={activeZoneClass} title={activeZoneButtonText}>
+          <Dropdown.Item id="zone-color-1" className="zone-color-1" eventKey="1">1</Dropdown.Item>
+          <Dropdown.Item id="zone-color-2" className="zone-color-2" eventKey="2">2</Dropdown.Item>
+          <Dropdown.Item id="zone-color-3" className="zone-color-3" eventKey="3">3</Dropdown.Item>
+          <Dropdown.Item id="zone-color-4" className="zone-color-4" eventKey="4">4</Dropdown.Item>
+          <Dropdown.Item id="zone-color-5" className="zone-color-5" eventKey="5">5</Dropdown.Item>
+          <Dropdown.Item id="zone-color-6" className="zone-color-6" eventKey="6">6</Dropdown.Item>
+          <Dropdown.Item id="zone-color-7" className="zone-color-7" eventKey="7">7</Dropdown.Item>
+          <Dropdown.Item id="zone-color-8" className="zone-color-8" eventKey="8">8</Dropdown.Item>
+          <Dropdown.Item id="zone-color-mountain" className="zone-color-mountain" eventKey="mountain">Fjällregionen</Dropdown.Item>
+        </DropdownButton>
+        
+    </Row>
 
-              <Dropdown.Item id="zone-color-1" className="zone-color-1" eventKey="1">1</Dropdown.Item>
-              <Dropdown.Item id="zone-color-2" className="zone-color-2" eventKey="2">2</Dropdown.Item>
-              <Dropdown.Item id="zone-color-3" className="zone-color-3" eventKey="3">3</Dropdown.Item>
-              <Dropdown.Item id="zone-color-4" className="zone-color-4" eventKey="4">4</Dropdown.Item>
-              <Dropdown.Item id="zone-color-5" className="zone-color-5" eventKey="5">5</Dropdown.Item>
-              <Dropdown.Item id="zone-color-6" className="zone-color-6" eventKey="6">6</Dropdown.Item>
-              <Dropdown.Item id="zone-color-7" className="zone-color-7" eventKey="7">7</Dropdown.Item>
-              <Dropdown.Item id="zone-color-8" className="zone-color-8" eventKey="8">8</Dropdown.Item>
-              <Dropdown.Item id="zone-color-mountain" className="zone-color-mountain" eventKey="mountain">Fjällregionen</Dropdown.Item>
-            </DropdownButton>
-         
-        </Row>
+    <Row>
+      {activeMonth > -1 && <Month month={months[activeMonth]} />}
+      {activeDay && <DayDetails day={activeDay}/>} 
+      {activeDay && showAddDayEvent && <AddEventForm day={activeDay}/>} 
+    </Row>
 
-        <Row>
-         {activeMonth > -1 && <Month month={months[activeMonth]} />}
-         {activeDay && <DayDetails day={activeDay}/>} 
-         {activeDay && showAddDayEvent && <AddEventForm day={activeDay}/>} 
-        </Row>
-
-      <Row>
-        <Col className={"year-pie"}>
+    <Row>
+      <Col className={"year-pie"}>
         <PieChart
           background="#04703c"
           data={monthArray}
@@ -129,14 +128,12 @@ const Calendar: React.FC = () => {
           }}
           onClick={onClick}
         />
-        </Col>
-      
-        <Col xs={6} md={4}>
-          <Image src={window.location.origin + '/zoner.gif'}/>
-        </Col>
-
-      </Row>
-
+      </Col>
+    
+      <Col xs={6} md={4}>
+        <Image src={window.location.origin + '/zoner.gif'}/>
+      </Col>
+    </Row>
   </Container>
 </Context.Provider>
   );
