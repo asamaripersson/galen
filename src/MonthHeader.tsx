@@ -1,7 +1,7 @@
 import React, { useContext  } from "react";
 import svLocale from "date-fns/locale/sv";
 import { format, isWithinInterval, startOfDay, endOfDay } from "date-fns";
-import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import { Context } from './Context';
 
 interface MonthHeaderProps {
@@ -24,18 +24,17 @@ const MonthHeader: React.FC<MonthHeaderProps> = ({ month }) => {
       return ez.geoZones.includes(activeZone);
     })
   }
-   
 
   return (
     <>
-    <Container>
+    <Row>
+      <div>
       <h2>{nameOfMonth}</h2>
       {filteredEvents?.map((monthEvent)=>{
         return <p>{monthEvent.tags.toString()}</p>
-      })}
-       
-    </Container>
-    
+      })}  
+      </div>
+    </Row>
     </>
   );
 };

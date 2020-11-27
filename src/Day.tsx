@@ -37,7 +37,7 @@ const Day: React.FC<DayProps> = ({ day }) => {
               <>
               <div>
                 <span className="event-title" key={dayEvent.title}>{dayEvent.title} </span>
-                <button key={dayEvent.description} onClick={handleRemoveEventClick} value={dayEvent.id} className="remove-event">
+                <button key={dayEvent.description} onClick={handleRemoveEventClick} value={dayEvent._id} className="remove-event">
                   x
                 </button>
               </div>

@@ -1,7 +1,7 @@
 import {createContext, Dispatch,SetStateAction } from 'react';
 
 export interface DayEvent{
-    id?:string;
+    _id?:string;
     title:string;
     description?:string;
     tags:string[];
@@ -9,7 +9,7 @@ export interface DayEvent{
     endDate:Date;
 }
 export interface MonthEvent{
-    id:string;
+    _id:string;
     tags:string[];
     geoZones:string[];
     startDate:Date;

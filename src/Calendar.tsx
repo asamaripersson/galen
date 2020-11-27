@@ -6,6 +6,7 @@ import { eachMonthOfInterval, format, getYear, getMonth } from "date-fns";
 import DayDetails from './DayDetails';
 import { Context, DayEvent } from './Context';
 import AddEventForm from './AddEventForm';
+import MonthHeader from './MonthHeader';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -24,28 +25,28 @@ const Calendar: React.FC = () => {
   const [events, setEvents] = useState([]);
 
   const getAllMonthEvents = async()=> {
-    const result = await fetch("http://localhost:3001/monthlyEvents");
+    const result = await fetch("http://localhost:8080/monthEvents");
     const data = await result.json();
-   
+   console.log(data);
     setMonthEvents(data);
   }
 
   const getAllEvents = async()=> {
-    const result = await fetch("http://localhost:3001/events");
+    const result = await fetch("http://localhost:8080/events");
     const data = await result.json();
-    
+    console.log("----",data);
     setEvents(data);
   }
   
   const deleteEvent = async(id:string)=>{
-    const result = await fetch("http://localhost:3001/events/"+id,
+    const result = await fetch("http://localhost:8080/deleteEvent/"+id,
     {method:"DELETE"});
     const data = await result.json();
   
     getAllEvents();
   }
   const addEventToDb = async(d:FormData)=>{
-    const result = await fetch("http://localhost:3001/events/",
+    const result = await fetch("http://localhost:8080/events/",
     {
       method:"POST",
       body:JSON.stringify(d),
@@ -103,9 +104,8 @@ return (
           <Dropdown.Item id="zone-color-8" className="zone-color-8" eventKey="8">8</Dropdown.Item>
           <Dropdown.Item id="zone-color-mountain" className="zone-color-mountain" eventKey="mountain">Fjällregionen</Dropdown.Item>
         </DropdownButton>
-        
     </Row>
-
+    {activeMonth > -1 && <MonthHeader month={months[activeMonth]}/>}
     <Row>
       {activeMonth > -1 && <Month month={months[activeMonth]} />}
       {activeDay && <DayDetails day={activeDay}/>} 

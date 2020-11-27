@@ -25,7 +25,7 @@ const DayDetails: React.FC<DayDetailsPropps> = ({ day }) => {
     const dateOfDay = format(day, "dd MMMM yyyy", { locale: svLocale });
     const nameOfDay = format(day, "EEEE", {locale:svLocale});
     return <>
-        <Col className="day-details" >
+        <Col className="day-details col-md-6" >
             <h2 className="day-number">{nameOfDay} {dateOfDay}</h2>
             <div className="day-details-inner">
                 <button className="add-event btn btn-outline-success" onClick={handleAddEventClick}>&#43;</button>
@@ -38,7 +38,7 @@ const DayDetails: React.FC<DayDetailsPropps> = ({ day }) => {
                         })}
                         <h3 key={dayEvent.title}>{dayEvent.title} </h3>
                         <p key={dayEvent.description}>{dayEvent.description}</p>
-                        <button onClick={handleRemoveEventClick} value={dayEvent.id} className="remove-event">
+                        <button onClick={handleRemoveEventClick} value={dayEvent._id} className="remove-event">
                          x
                         </button>
                     </div>
