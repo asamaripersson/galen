@@ -3,6 +3,7 @@ import svLocale from "date-fns/locale/sv";
 import { format, isWithinInterval, startOfDay, endOfDay } from "date-fns";
 import Row from 'react-bootstrap/Row';
 import { Context } from './Context';
+import { Accordion, Button, Card } from "react-bootstrap";
 
 interface MonthHeaderProps {
   month?: Date;
@@ -28,11 +29,27 @@ const MonthHeader: React.FC<MonthHeaderProps> = ({ month }) => {
   return (
     <>
     <Row>
-      <div>
+    <div>
       <h2>{nameOfMonth}</h2>
-      {filteredEvents?.map((monthEvent)=>{
-        return <p>{monthEvent.tags.toString()}</p>
-      })}  
+ 
+     
+      {filteredEvents?.map((monthEvent)=>(
+          <>
+            <Accordion>
+              <Card>
+                <Card.Header className={`monthly-event-title tag ${monthEvent.tags.toString()}`}>
+                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                  {monthEvent.title}
+                  </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>{monthEvent.description}</Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+          </>
+      ))}
+
       </div>
     </Row>
     </>

@@ -64,9 +64,20 @@ select {
 .month-tag {
   padding: 10px;
 }
+.monthly-event-title.tag.card-header {
+  padding: 0;
+}
+.monthly-event-title.tag.card-header > button {
+  color: #faf6ea;
+}
+.monthly-event-title.tag.card-header.plant {
+  background-color: green;
+}
+.monthly-event-title.tag.card-header.harvest {
+  background-color: #ffc300;
+}
 .tag {
   display: inline-block;
-  max-width: 55px;
   padding: 0 5px;
   border-radius: 5px;
   font-size: 12px;
@@ -139,10 +150,14 @@ select {
   font-weight: bold;
 }
 .day-number {
+  margin: -1px;
   font-weight: 700;
   text-align: center;
-  background-color: #d6232e;
+  background-color: #078c4c;
   color: #fff;
+}
+.day-number.today {
+  background-color: #06ba63;
 }
 .event-in-day {
   cursor: pointer;

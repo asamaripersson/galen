@@ -15,7 +15,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { DropdownButton } from "react-bootstrap";
 
 const Calendar: React.FC = () => {
-
   //states in context
   const [activeMonth, setActiveMonth] = useState(-1);
   const [activeDay, setActiveDay] = useState<Date | undefined>();
@@ -25,16 +24,16 @@ const Calendar: React.FC = () => {
   const [events, setEvents] = useState([]);
 
   const getAllMonthEvents = async()=> {
-    const result = await fetch("http://localhost:8080/monthEvents");
+    const result = await fetch("http://localhost:3001/monthEvents");
     const data = await result.json();
-   console.log(data);
+   console.log("All month events ",data);
     setMonthEvents(data);
   }
 
   const getAllEvents = async()=> {
     const result = await fetch("http://localhost:8080/events");
     const data = await result.json();
-    console.log("----",data);
+    console.log("All events ",data);
     setEvents(data);
   }
   
@@ -56,17 +55,15 @@ const Calendar: React.FC = () => {
     getAllEvents();
   }
 
-  const currentYear = getYear(Date.now());
-  
   const months = eachMonthOfInterval({
-    start: new Date(currentYear, 0, 1),
-    end: new Date(currentYear, 11, 30),
+    start: new Date(getYear(Date.now()), 0, 1),
+    end: new Date(getYear(Date.now()), 11, 30),
   });
 
   const monthArray = months.map((month) => ({
     title: format(month, "MMM", { locale: svLocale }),
     value: 1 / 12,
-    color: getMonth(month) == getMonth(Date.now()) ? "#06BA63" : "#06BA11",
+    color: getMonth(month) == getMonth(Date.now()) ? "#06BA63" : "#078c4c",
   }));
 
   const onClick = (_: React.MouseEvent, index: number) => {
@@ -121,10 +118,9 @@ return (
           label={(labelProps) => labelProps.dataEntry.title}
           labelPosition={100 / 2}
           labelStyle={{
-            fill: "#04703c",
+            fill: "#FAF6EA",
             pointerEvents: "none",
-            fontSize: "4px",
-            fontWeight: "bold"
+            fontSize: "4px"
           }}
           onClick={onClick}
         />

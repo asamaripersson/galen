@@ -10,6 +10,8 @@ export interface DayEvent{
 }
 export interface MonthEvent{
     _id:string;
+    title:string;
+    description:string;
     tags:string[];
     geoZones:string[];
     startDate:Date;

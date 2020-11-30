@@ -80,12 +80,14 @@
       "id": "uS6QI3y"
     }
   ],
-  "monthlyEvents": [
+  "monthEvents": [
     {
-      "startDate": "2020-07-01",
+      "title": "Nya Planteringar",
+      "description" : "September är nog den bästa planteringsmånaden på hela året. Värmen dröjer sig kvar i jorden, samtidigt som luften är fuktmättad, dagarna ofta klara och vackra. Det är med andra ord en perfekt tid för att anlägga nytt: perennrabatter, buskplantering, att sätta träd av olika slag. Varför inte plantera nya bärbuskar i trädgården så att du och familjen har något gott att plocka nästa sommar? Planterar du klätterväxter vid huset eller pergolan får de en tidig start i vår och hinner upp och täcka mycket mer av din spaljé än om du väntar till våren. Utbudet av växter är också stort i plantskolan nu!",
+      "startDate": "2020-09-01",
       "endDate": "2020-09-30",
       "tags": [
-        "JAS-beskäring"
+        "plant"
       ],
       "geoZones": [
         "1",
@@ -96,23 +98,12 @@
       "id": "--5t8eeg"
     },
     {
-      "startDate": "2020-08-01",
+      "title": "Skörda mera",
+      "description" : "Nu är det mesta av primörerna säkert uppätet för länge sedan, men plocka gärna det som är kvar i kökslandet för vinterns behov. Ärtor och bönor kan förvällas och läggas i frysen, annat passar sig bättre som inläggning eller direkt i salladen. Lök bör hängas på tork för att få ett tjockare skal och därmed tåla lagring bättre. Allt som är ovan jord (utom kål och persilja) måste vara skördat innan första frosten.",
+      "startDate": "2020-09-01",
       "endDate": "2020-09-30",
       "tags": [
-        "Sätta vårlökar"
-      ],
-      "geoZones": [
-        "5",
-        "6",
-        "7"
-      ],
-      "id": "-5t8exxg"
-    },
-    {
-      "startDate": "2020-09-01",
-      "endDate": "2020-10-30",
-      "tags": [
-        "Sätta vårlökar"
+        "harvest"
       ],
       "geoZones": [
         "1",
@@ -120,7 +111,7 @@
         "3",
         "4"
       ],
-      "id": "koko5t8eeg"
+      "id": "--5t8eec"
     }
   ]
 }

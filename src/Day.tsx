@@ -1,5 +1,5 @@
 import React, { useContext  } from "react";
-import { format, isWithinInterval, startOfDay, endOfDay } from "date-fns";
+import { format, isWithinInterval, startOfDay, endOfDay, isToday } from "date-fns";
 import svLocale from "date-fns/locale/sv";
 import { Context } from './Context';
 
@@ -13,7 +13,10 @@ const Day: React.FC<DayProps> = ({ day }) => {
   }
   const {setActiveDay, events} = useContext(Context);
   const {deleteEvent} = useContext(Context);
+
+  const isTodayClass = isToday(day) ? "today" : "";
   const numberOfDay = format(day, "dd", { locale: svLocale });
+
 
   const filteredEvents = events?.filter((e)=>{
     return isWithinInterval(day,{start:startOfDay(new Date(e.startDate)), end:endOfDay(new Date(e.endDate))})
@@ -31,7 +34,7 @@ const Day: React.FC<DayProps> = ({ day }) => {
     <>
       <td key={day.toString()} className="day">
         <div onClick={handleClick}>
-          <div className="day-number">{numberOfDay}</div>
+          <div className={`day-number ${isTodayClass}`}>{numberOfDay}</div>
           <div>
             {filteredEvents?.map((dayEvent)=>(
               <>
