@@ -33,9 +33,6 @@ const DayDetails: React.FC<DayDetailsPropps> = ({ day }) => {
                 {filteredEvents?.map((dayEvent)=>{
                     return <>
                     <div className="event-details">
-                        {dayEvent.tags?.map((tag)=>{
-                            return <div key={tag} className={`tag ${tag}`}>{tag}</div>
-                        })}
                         <h3 key={dayEvent.title}>{dayEvent.title} </h3>
                         <p key={dayEvent.description}>{dayEvent.description}</p>
                         <button onClick={handleRemoveEventClick} value={dayEvent._id} className="remove-event">

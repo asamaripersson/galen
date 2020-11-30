@@ -19,6 +19,7 @@
     "react-hook-form": "^6.11.0",
     "react-minimal-pie-chart": "^8.0.1",
     "react-scripts": "3.4.3",
+    "react-sliding-side-panel": "^2.0.3",
     "typescript": "~3.8.0"
   },
   "scripts": {

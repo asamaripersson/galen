@@ -12,13 +12,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { DropdownButton } from "react-bootstrap";
+import { Button, DropdownButton } from "react-bootstrap";
+import SlidingPanel from "react-sliding-side-panel";
+import 'react-sliding-side-panel/lib/index.css';
+import AddMonthEventForm from "./AddMonthEventForm";
 
 const Calendar: React.FC = () => {
   //states in context
   const [activeMonth, setActiveMonth] = useState(-1);
   const [activeDay, setActiveDay] = useState<Date | undefined>();
   const [showAddDayEvent, setShowAddDayEvent] = useState(false);
+  const [addMonthEvent, setAddMonthEvent] = useState(false);
+
   const [activeZone, setActiveZone] = useState(null);
   const[monthEvents,setMonthEvents] =useState([]);
   const [events, setEvents] = useState([]);
@@ -29,7 +34,16 @@ const Calendar: React.FC = () => {
    console.log("All month events ",data);
     setMonthEvents(data);
   }
-
+  const addMonthEventToDb = async(d:FormData)=>{
+    const result = await fetch("http://localhost:3001/monthEvents/",
+    {
+      method:"POST",
+      body:JSON.stringify(d),
+      headers:{"Content-Type": "application/json"}
+    });
+    const data = await result.json();
+    getAllMonthEvents();
+  }
   const getAllEvents = async()=> {
     const result = await fetch("http://localhost:8080/events");
     const data = await result.json();
@@ -80,17 +94,47 @@ const Calendar: React.FC = () => {
 
   const [activeZoneClass, setActiveZoneClass] = useState("no-zone");
   const [activeZoneButtonText, setActiveZoneButtonText] = useState("Välj zon");
-
+  const [openPanel, setOpenPanel] = useState(false);
+  
   const handleZoneClick =(event: any)=> {
-    setActiveZoneClass("set zoneclass = zone-color-"+event);
-    setActiveZoneButtonText("Vald zon: "+event);
-    setActiveZone(event);//TODO rätt?
+    setOpenPanel(true);
+    //TODO toggle
+  }
+
+const handleZoneSelect =(event: any)=> {
+  setOpenPanel(false);
+  console.log("is panel open? ", openPanel);
+  setActiveZoneClass("set zoneclass = zone-color-"+event);
+  setActiveZoneButtonText("Vald zon: "+event);
+  setActiveZone(event);//TODO rätt?
+}
+
+const handleAddMonthEventClick = (event: any) => {
+  setAddMonthEvent(true);
+  console.log("handleAddMonthEventClick");
 }
 return (
-<Context.Provider value={{monthEvents, setMonthEvents, activeZone, setActiveZone, deleteEvent, activeDay, setActiveDay, events, setEvents, setShowAddDayEvent, showAddDayEvent, addEventToDb}}>
+  
+<Context.Provider value={{monthEvents, setMonthEvents, activeZone, setActiveZone, deleteEvent, activeDay, setActiveDay, events, setEvents, setShowAddDayEvent, showAddDayEvent, addMonthEvent, addMonthEventToDb, setAddMonthEvent, addEventToDb}}>
+  
+<SlidingPanel
+        type={'right'}
+        isOpen={openPanel}
+        size={30}
+        noBackdrop={true}
+      >
+        <div>
+          <button onClick={() => setOpenPanel(false)}>close</button>
+          <div className="zone-map-div"> 
+            <Image className="zone-map-img" src={window.location.origin + '/zoner.gif'}/>
+          </div>
+        </div>
+      </SlidingPanel>
+
   <Container>
     <Row>
-        <DropdownButton onSelect={handleZoneClick} id="dropdown-zone-button" className={activeZoneClass} title={activeZoneButtonText}>
+      <Col className="align-self-start">
+        <DropdownButton onClick={handleZoneClick} onSelect={handleZoneSelect} id="dropdown-zone-button" className={activeZoneClass} title={activeZoneButtonText}>
           <Dropdown.Item id="zone-color-1" className="zone-color-1" eventKey="1">1</Dropdown.Item>
           <Dropdown.Item id="zone-color-2" className="zone-color-2" eventKey="2">2</Dropdown.Item>
           <Dropdown.Item id="zone-color-3" className="zone-color-3" eventKey="3">3</Dropdown.Item>
@@ -101,16 +145,21 @@ return (
           <Dropdown.Item id="zone-color-8" className="zone-color-8" eventKey="8">8</Dropdown.Item>
           <Dropdown.Item id="zone-color-mountain" className="zone-color-mountain" eventKey="mountain">Fjällregionen</Dropdown.Item>
         </DropdownButton>
+        </Col>
+        <Col className="align-self-end">
+        <Button onClick={handleAddMonthEventClick}>Skapa månadsaktivitet</Button>
+        </Col>
     </Row>
+
     {activeMonth > -1 && <MonthHeader month={months[activeMonth]}/>}
     <Row>
       {activeMonth > -1 && <Month month={months[activeMonth]} />}
       {activeDay && <DayDetails day={activeDay}/>} 
       {activeDay && showAddDayEvent && <AddEventForm day={activeDay}/>} 
+      {addMonthEvent && <AddMonthEventForm day={activeDay} />}
     </Row>
-
-    <Row>
-      <Col className={"year-pie"}>
+   
+    <Row className={"year-pie"}>
         <PieChart
           background="#04703c"
           data={monthArray}
@@ -124,11 +173,6 @@ return (
           }}
           onClick={onClick}
         />
-      </Col>
-    
-      <Col xs={6} md={4}>
-        <Image src={window.location.origin + '/zoner.gif'}/>
-      </Col>
     </Row>
   </Container>
 </Context.Provider>

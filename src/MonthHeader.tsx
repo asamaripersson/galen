@@ -31,8 +31,6 @@ const MonthHeader: React.FC<MonthHeaderProps> = ({ month }) => {
     <Row>
     <div>
       <h2>{nameOfMonth}</h2>
- 
-     
       {filteredEvents?.map((monthEvent)=>(
           <>
             <Accordion>
@@ -49,7 +47,6 @@ const MonthHeader: React.FC<MonthHeaderProps> = ({ month }) => {
             </Accordion>
           </>
       ))}
-
       </div>
     </Row>
     </>

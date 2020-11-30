@@ -1,3 +1,37 @@
+#root {
+  height: 100%;
+  margin: 0px;
+}
+
+.example-container {
+  height: 100%;
+  background-color: rgb(185, 209, 253);
+}
+
+.panel-container {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+button {
+  margin: 2px;
+}
+
+.form-container {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-container {
+  padding: 10px;
+}
 .year-pie {
   max-width: 50%;
   margin-top: 10%;
@@ -14,6 +48,12 @@ select {
   width: 100%;
 }
 
+.zone-map-div {
+  height: 400px;
+}
+.zone-map-img {
+  height: 350px;
+}
 .no-zone > #dropdown-zone-button {
   background-color: #06ba63;
 }
@@ -96,7 +136,7 @@ select {
 }
 .event-details {
   position: relative;
-  border-top: 1px solid brown;
+  border-top: 1px solid #078c4c;
   margin-top: 20px;
   padding: 10px 20px 0;
 }
