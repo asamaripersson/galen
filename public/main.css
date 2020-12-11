@@ -48,11 +48,9 @@ select {
   width: 100%;
 }
 
-.zone-map-div {
-  height: 400px;
-}
-.zone-map-img {
-  height: 350px;
+.map-img {
+  height: auto;
+  max-width: 100%;
 }
 .no-zone > #dropdown-zone-button {
   background-color: #06ba63;
@@ -116,6 +114,9 @@ select {
 .monthly-event-title.tag.card-header.harvest {
   background-color: #ffc300;
 }
+.monthly-event-title.tag.card-header.compost {
+  background-color: brown;
+}
 .tag {
   display: inline-block;
   padding: 0 5px;
@@ -133,6 +134,9 @@ select {
 }
 .plant {
   background-color: green;
+}
+.compost {
+  background-color: brown;
 }
 .event-details {
   position: relative;

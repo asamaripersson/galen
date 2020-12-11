@@ -1,8 +1,9 @@
 import React from "react";
-import Calendar from "./Calendar";
+import Header from "./Header";
 
 function App() {
-  return <Calendar />;
+  //En knapp som sätter calendarstate
+  return <Header />;
 }
 
 export default App;

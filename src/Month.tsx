@@ -23,6 +23,11 @@ const Month: React.FC<MonthProps> = ({ month }) => {
   return (
     <>
     <Col className="md-6">
+      
+    <button>Active Month.getNextMonth</button>
+    <h1>{nameOfMonth}</h1>
+    <button>Active Month.getPrevMonth</button>
+
       <table>
         <thead>
           <tr className="weekdays">
@@ -41,6 +46,7 @@ const Month: React.FC<MonthProps> = ({ month }) => {
           ))}
         </tbody>
       </table>
+
       </Col>
     </>
   );

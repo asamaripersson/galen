@@ -220,6 +220,19 @@
         "2"
       ],
       "id": "BdVzDQK"
+    },
+    {
+      "startDate": "2020-11-01",
+      "endDate": "2020-11-30",
+      "title": "snögubbe",
+      "description": "faef",
+      "tags": [
+        "harvest"
+      ],
+      "geoZones": [
+        "mountain"
+      ],
+      "id": "-Z3CGon"
     }
   ]
 }
