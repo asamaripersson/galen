@@ -1,33 +1,24 @@
-import React from "react";
-import svLocale from "date-fns/locale/sv";
-import { format, lastDayOfMonth, eachWeekOfInterval } from "date-fns";
+import React, { useContext  } from "react";
+import { lastDayOfMonth, startOfMonth, eachWeekOfInterval } from "date-fns";
 import Week from "./Week";
 import Row from 'react-bootstrap/Row';
 import { Col } from "react-bootstrap";
+import { Context } from './Context';
 
-interface MonthProps {
-  month?: Date;
-}
 
-const Month: React.FC<MonthProps> = ({ month }) => {
-  if (!month) {
+const Month: React.FC = () => {
+  const {activeMonth, setActiveMonth, events} = useContext(Context);
+  if (!activeMonth) {
     return null;
   }
-  const nameOfMonth = format(month, "MMMM", { locale: svLocale });
-
   const weeks = eachWeekOfInterval({
-    start: month,
-    end: lastDayOfMonth(month),
+    start: startOfMonth(activeMonth),
+    end: lastDayOfMonth(activeMonth),
   });
 
   return (
     <>
     <Col className="md-6">
-      
-    <button>Active Month.getNextMonth</button>
-    <h1>{nameOfMonth}</h1>
-    <button>Active Month.getPrevMonth</button>
-
       <table>
         <thead>
           <tr className="weekdays">

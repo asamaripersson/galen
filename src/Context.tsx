@@ -1,25 +1,23 @@
 import {createContext, Dispatch,SetStateAction } from 'react';
 
 export interface DayEvent{
-    _id?:string;
+    id?:string;
     title:string;
     description?:string;
-    tags:string[];
+    private:boolean;
     startDate:Date;
     endDate:Date;
 }
-export interface MonthEvent{
-    _id:string;
-    title:string;
-    description:string;
-    tags:string[];
-    geoZones:string[];
-    startDate:Date;
-    endDate:Date;
-}
+
 interface ContextProps {
     activeDay?: Date;
+    activeEndDay?: Date;
+    setActiveEndDay: Dispatch<SetStateAction<Date | undefined>>;
+    activeStartDay?: Date;
+    setActiveStartDay:Dispatch<SetStateAction<Date | undefined>>;
     setActiveDay: Dispatch<SetStateAction<Date | undefined>>;
+    setActiveMonth: Dispatch<SetStateAction<Date | undefined>>;
+    activeMonth?: Date;
     events?: DayEvent[];
     setEvents: Dispatch<SetStateAction<[]>>;
     showAddDayEvent: boolean;
@@ -29,8 +27,11 @@ interface ContextProps {
 }
 
 export const Context = createContext<ContextProps>({
+    setActiveEndDay:()=>null,
+    setActiveStartDay:()=>null,
     setEvents:()=>null,
     setActiveDay:()=>null,
+    setActiveMonth:()=>null,
     setShowAddDayEvent:()=>false,
     showAddDayEvent:false,
     addEventToDb:()=>null,

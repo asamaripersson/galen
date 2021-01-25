@@ -2,237 +2,51 @@
   "events": [
     {
       "id": "3",
-      "title": "Plocka potatis",
-      "description": "ba gört!",
-      "tags": [
-        "JAS",
-        "harvest"
-      ],
-      "startDate": "2020-09-11",
-      "endDate": "2020-09-11"
+      "title": "Lyberg",
+      "description": "Vi firar Andreas och Bertil",
+      "startDate": "2021-07-11",
+      "endDate": "2021-07-21",
+      "private": true
     },
     {
       "startDate": "2020-11-27",
       "endDate": "2020-11-27",
-      "title": "jo",
-      "description": "jojo",
-      "tags": [
-        "plant"
-      ],
-      "id": "LCeGkZK"
+      "title": "Tomas & Camilla",
+      "description": "Åker ut och myser med Robin. Tänkte bo i norrstugan, andra är välkomna men tänk på corona!",
+      "id": "LCeGkZK",
+      "private": false
     },
     {
-      "startDate": "2020-11-28",
-      "endDate": "2020-11-28",
+      "startDate": "2021-01-21",
+      "endDate": "2021-01-31",
+      "title": "prinskalas",
+      "description": "ojoj",
+      "private": true,
+      "id": "i2yHQ2F"
+    },
+    {
+      "startDate": "2021-02-07",
+      "endDate": "2021-02-28",
+      "title": "ojojoj",
+      "description": "sssa@mail.com",
+      "private": false,
+      "id": "9gkA57F"
+    },
+    {
+      "startDate": "2021-02-13",
+      "endDate": "2021-03-01",
+      "title": "2021-02-13",
+      "description": "",
+      "private": false,
+      "id": "VKeIN43"
+    },
+    {
+      "startDate": "2021-01-16",
+      "endDate": "2021-01-20",
       "title": "hej",
-      "description": "ehhe",
-      "tags": [
-        "plant"
-      ],
-      "id": "K0OyH-j"
-    },
-    {
-      "startDate": "2020-11-28",
-      "endDate": "2020-11-28",
-      "title": "så sallad",
-      "description": "ruccula",
-      "tags": [
-        "plant"
-      ],
-      "id": "vcH20A5"
-    },
-    {
-      "startDate": "2020-12-25",
-      "endDate": "2020-12-25",
-      "title": "julstjärna",
-      "description": "det blir allergifri plast!",
-      "tags": [
-        "plant"
-      ],
-      "id": "--5t86g"
-    },
-    {
-      "startDate": "2020-10-04",
-      "endDate": "2020-10-04",
-      "title": "Goefest",
-      "description": "Gottesurfa",
-      "tags": [
-        "plant"
-      ],
-      "id": "wewB4js"
-    },
-    {
-      "startDate": "2020-09-11",
-      "endDate": "2020-09-11",
-      "title": "vinbären!",
-      "description": "goda?",
-      "tags": [
-        "harvest"
-      ],
-      "id": "TSqBJbB"
-    },
-    {
-      "startDate": "2020-09-10",
-      "endDate": "2020-09-10",
-      "title": "Kapade äppleträdet",
-      "description": "Kanske tog för mkt. ",
-      "tags": [],
-      "id": "uS6QI3y"
-    }
-  ],
-  "monthEvents": [
-    {
-      "title": "Nya Planteringar",
-      "description": "September är nog den bästa planteringsmånaden på hela året. Värmen dröjer sig kvar i jorden, samtidigt som luften är fuktmättad, dagarna ofta klara och vackra. Det är med andra ord en perfekt tid för att anlägga nytt: perennrabatter, buskplantering, att sätta träd av olika slag. Varför inte plantera nya bärbuskar i trädgården så att du och familjen har något gott att plocka nästa sommar? Planterar du klätterväxter vid huset eller pergolan får de en tidig start i vår och hinner upp och täcka mycket mer av din spaljé än om du väntar till våren. Utbudet av växter är också stort i plantskolan nu!",
-      "startDate": "2020-09-01",
-      "endDate": "2020-09-30",
-      "tags": [
-        "plant"
-      ],
-      "geoZones": [
-        "1",
-        "2",
-        "3",
-        "4"
-      ],
-      "id": "--5t8eeg"
-    },
-    {
-      "title": "Skörda mera",
-      "description": "Nu är det mesta av primörerna säkert uppätet för länge sedan, men plocka gärna det som är kvar i kökslandet för vinterns behov. Ärtor och bönor kan förvällas och läggas i frysen, annat passar sig bättre som inläggning eller direkt i salladen. Lök bör hängas på tork för att få ett tjockare skal och därmed tåla lagring bättre. Allt som är ovan jord (utom kål och persilja) måste vara skördat innan första frosten.",
-      "startDate": "2020-09-01",
-      "endDate": "2020-09-30",
-      "tags": [
-        "harvest"
-      ],
-      "geoZones": [
-        "1",
-        "2",
-        "3",
-        "4"
-      ],
-      "id": "--5t8eec"
-    },
-    {
-      "startDate": "2020-11-01",
-      "endDate": "2020-11-30",
-      "title": "nytt månadsevent",
-      "description": "besken",
-      "tags": [
-        "plant"
-      ],
-      "geoZones": [
-        "1",
-        "2",
-        "3",
-        "4"
-      ],
-      "id": "8nYq43n"
-    },
-    {
-      "startDate": "30 november 2020",
-      "endDate": "2020-12-10",
-      "title": "hej igen november",
-      "description": "november rain",
-      "tags": [
-        "plant"
-      ],
-      "geoZones": [
-        "1"
-      ],
-      "id": "1gNfxgm"
-    },
-    {
-      "startDate": "30 november 2020",
-      "endDate": "2020-12-10",
-      "title": "jaha dec",
-      "description": "decy",
-      "tags": [
-        "plant"
-      ],
-      "geoZones": [
-        "1"
-      ],
-      "id": "B1RDE9N"
-    },
-    {
-      "startDate": "2020-11-30",
-      "endDate": "2020-12-10",
-      "title": "ok nu nov",
-      "description": "noooov",
-      "tags": [
-        "harvest"
-      ],
-      "geoZones": [
-        "1",
-        "2"
-      ],
-      "id": "AeW7854"
-    },
-    {
-      "startDate": "2020-11-30",
-      "endDate": "2020-12-10",
-      "title": "aa",
-      "description": "aaaa",
-      "tags": [
-        "harvest"
-      ],
-      "geoZones": [
-        "2"
-      ],
-      "id": "hen9d4q"
-    },
-    {
-      "startDate": "2020-10-01",
-      "endDate": "2020-11-30",
-      "title": "okt-nov",
-      "description": "gergrhg",
-      "tags": [
-        "harvest"
-      ],
-      "geoZones": [
-        "2"
-      ],
-      "id": "HA3lEoM"
-    },
-    {
-      "startDate": "2020-06-21",
-      "endDate": "2020-06-30",
-      "title": "KRÅKAN FYLLER ÅR",
-      "description": "jorå, nog ska det firas",
-      "tags": [
-        "harvest"
-      ],
-      "geoZones": [
-        "2"
-      ],
-      "id": "kwPxbsy"
-    },
-    {
-      "startDate": "2020-07-01",
-      "endDate": "2020-07-30",
-      "title": "july",
-      "description": "juky",
-      "tags": [
-        "plant"
-      ],
-      "geoZones": [
-        "2"
-      ],
-      "id": "BdVzDQK"
-    },
-    {
-      "startDate": "2020-11-01",
-      "endDate": "2020-11-30",
-      "title": "snögubbe",
-      "description": "faef",
-      "tags": [
-        "harvest"
-      ],
-      "geoZones": [
-        "mountain"
-      ],
-      "id": "-Z3CGon"
+      "description": "",
+      "private": false,
+      "id": "py92LBO"
     }
   ]
 }
