@@ -25,11 +25,19 @@ const Day: React.FC<DayProps> = ({ day }) => {
   if (isEqual(day, activeStartDay) || isEqual(day, activeEndDay)) {
     chosenDay = true;
   }
-  if (activeStartDay != null && activeEndDay != null && isWithinInterval(day, { start: startOfDay(new Date(activeStartDay)), end: endOfDay(new Date(activeEndDay)) })) {
+  if (activeStartDay != null && activeEndDay != null
+    && activeStartDay < activeEndDay
+    && isWithinInterval(day, { start: startOfDay(new Date(activeStartDay)), end: endOfDay(new Date(activeEndDay)) })) {
     chosenDay = true;
   }
   const privateEvents = filteredEvents.filter((dayEvent) => { return dayEvent.private });
+  // let whithinPrivateEvents = [];
+  //if (activeStartDay != null && activeEndDay != null){
+  //  
+  //}
   
+  let okToBook = false;
+     
   if (privateEvents.length > 0) {
     bookedClass = "booked-private";
   } else if (filteredEvents.length > 0 && privateEvents.length === 0) {
@@ -38,24 +46,36 @@ const Day: React.FC<DayProps> = ({ day }) => {
   
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setActiveDay(day);
+
     if (filteredEvents.length > 0 && privateEvents.length > 0) {
         return;
     }
     if (!activeStartDay) {
-      setActiveStartDay(day);
-      if(!activeEndDay){setActiveEndDay(day)}
+      setActiveStartDay(day); //finns ingen start, kbk
+      if (!activeEndDay) { setActiveEndDay(day) } //för en dag
+      
     } else if (activeStartDay > day) {
-      setActiveStartDay(day);
+      setActiveStartDay(day); // nyare startdag
+
     } else if (activeStartDay < day) {
-      setActiveEndDay(day);
-    } else if(isEqual(day, activeStartDay)){
+      //kolla om det är obokbara datum inom spannet här åsså?
+      setActiveEndDay(day); //start är satt, det blir en end day
+      
+      // if (activeEndDay != null && activeStartDay != null) {
+
+      // }
+      
+
+    } else if (isEqual(day, activeStartDay)) { //samma, nulla en eller båda
+      
       setActiveStartDay(null);
+
       if (activeEndDay != null) {
         setActiveEndDay(null);
       }
     }
 
-     if(isEqual(day, activeEndDay)) {
+     if(isEqual(day, activeEndDay)) { //samma, nulla en eller båda
       setActiveEndDay(null);
       if (activeStartDay != null) {
         setActiveStartDay(null);
@@ -65,14 +85,13 @@ const Day: React.FC<DayProps> = ({ day }) => {
 
   return (
     <>
-      <td key={day.toString()} className={`day ${bookedClass}`}>
-        <div onClick={handleClick} className={chosenDay ? `is-chosen ${bookedClass}` : bookedClass}>
-          <div className={`day-number ${isTodayClass}`}>{numberOfDay}</div>
-            {filteredEvents?.map((dayEvent)=>(
-              <>
-              <div>
-                <span className="event-title" key={dayEvent.title}>{dayEvent.title} </span>
-              </div>
+      <td key={day.toString() + Math.floor(Math.random() * Math.floor(9999999))} className={`day ${bookedClass}`}>
+        <div key={day.toString() + Math.floor(Math.random() * Math.floor(9999999))} onClick={handleClick} className={chosenDay ? `is-chosen ${bookedClass}` : bookedClass}>
+          <div key={"ho" + Math.floor(Math.random() * Math.floor(9999999))} className={`day-number ${isTodayClass}`}>{numberOfDay}</div>
+           <p className={`red-booked-text ${bookedClass}`}>{bookedClass == "booked-private" ? "BOKAT" : bookedClass == "booked-open" ?"Delvis bokat" : ""} </p>
+          {filteredEvents?.map((dayEvent) => (
+            <>
+                <span className="event-title" key={dayEvent.title + + Math.floor(Math.random() * Math.floor(9999999))}>{dayEvent.title}  </span>
               </>
             ))}
           </div>

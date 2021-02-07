@@ -25,7 +25,7 @@ const DayDetails: React.FC<DayDetailsPropps> = ({ day }) => {
     const dateOfDay = format(day, "dd MMMM yyyy", { locale: svLocale });
     const nameOfDay = format(day, "EEEE", {locale:svLocale});
     return <>
-        <div className="day-details" >
+        <div className="day-details col md-3" >
             <h2 className="day-number">{nameOfDay} {dateOfDay}</h2>
             <div className="day-details-inner">
 
@@ -34,7 +34,7 @@ const DayDetails: React.FC<DayDetailsPropps> = ({ day }) => {
                 {filteredEvents?.map((dayEvent)=>{
                     return <>
                     <div className="event-details">
-                        <h3 key={dayEvent.title}>{dayEvent.title} </h3>
+                        <h3 key={dayEvent.title}>{dayEvent.title} Hela ön </h3>
                             <p key={dayEvent.description}>{dayEvent.description}</p>
                             <p key={dayEvent.description+dayEvent.title}>{String(dayEvent.private)}</p>
                             

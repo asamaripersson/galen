@@ -2,11 +2,13 @@
   --primaryBlack: #1a1a1a;
   --primaryDarkGrey: #393e41;
   --primaryBrown: #43332b;
+  --headersBrown: #6f5549;
   --primaryWhite: #fff;
   --bgWhite: #f8f6ee;
   --primaryGreen: #1b998b;
   --primaryYellow: #dbb318;
   --primaryRed: #fe5f55;
+  --primaryLightBlue: #cbdddb;
 }
 
 #root {
@@ -14,22 +16,34 @@
   margin: 0px;
   background-color: var(--bgWhite);
 }
+
 .header-container {
-  max-width: 100% !important;
-  height: 150px;
-  /* background-color: #ffffff69;
-  box-shadow: 10px 10px 10px #1912120f; */
+  /* max-width: 100% !important;
+  height: 200px; */
+  background-color: var(--bgWhite);
+  box-shadow: 10px 10px 10px #1912120f;
+}
+.navbar-light .h1.navbar-brand {
+  font-size: 5em;
+  margin-left: 1em;
+  color: var(--primaryBrown);
 }
 .nav-link {
-  color: #6f5549;
-  font-size: xx-large;
-  text-decoration: underline;
+  color: var(--headersBrown);
 }
 .nav-link:hover {
   color: #6d7c9c;
 }
+h1,
+h2,
+h3 {
+  color: var(--headersBrown);
+}
 .ronnskar-page-container {
   margin-top: 50px;
+  background-color: var(--bgWhite);
+  width: 70%;
+  padding: 20px;
 }
 .example-container {
   height: 100%;
@@ -48,12 +62,19 @@ button {
   align-items: center;
   flex-direction: column;
 }
-span.has-error {
+span.has-error,
+p.has-error {
   color: red;
+}
+p.success {
+  margin-bottom: 0;
 }
 .form-group.has-error textarea,
 .form-group.has-error input {
   border: 2px solid var(--primaryRed);
+}
+.inline-form .form-group {
+  display: flex;
 }
 .input-container {
   padding: 10px;
@@ -67,7 +88,9 @@ th {
   color: var(--primaryBrown);
   height: 26px;
 }
-.add-event.btn {
+.go-to-book.btn,
+.add-event.btn,
+.inline-form button {
   background-color: var(--primaryGreen);
   color: var(--primaryWhite);
   font-weight: 600;
@@ -76,23 +99,54 @@ th {
   transition: 0.2s ease;
 }
 .add-event.btn:hover,
-.add-event.btn:focus,
-.add-event.btn:active {
+.go-to-book.btn:hover,
+.inline-form button:hover,
+.go-to-book.btn:focus,
+.go-to-book.btn:active,
+.inline-form button:focus .add-event.btn:focus,
+.add-event.btn:active,
+.inline-form button:active {
   color: var(--primaryWhite);
   background-color: rgba(27, 153, 139, 0.6);
 }
 .inline-form .form-group {
   margin: 0;
+  display: inline-block;
 }
 .inline-form label {
-  margin: 0;
-  display: block;
+  width: 20%;
 }
-.inline-form input,
-.inline-form textarea {
-  width: 90%;
-  margin: 0 0 0 26px;
+.inline-form textarea.form-control {
+  height: 38px;
+}
+.inline-form .form-check {
+  margin: 0;
   padding: 0;
+  display: inline-block;
+}
+.inline-form .form-check {
+  display: flex;
+  align-items: center;
+}
+.inline-form .form-check input[type="checkbox"] {
+  position: static;
+  margin: 0 10px 0 0;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+.inline-form .form-check label {
+  margin: 0;
+  width: 100%;
+  display: inline-block;
+}
+.inline-form button {
+  margin-top: 10px;
+  background-color: var(--primaryGreen);
+}
+.inline-form button[disabled="disabled"],
+.inline-form button:disabled {
+  background-color: var(--primaryDarkGrey);
 }
 .add-event-form label {
   display: block;
@@ -134,7 +188,7 @@ select {
 
 .event-details {
   position: relative;
-  border-top: 1px solid #7f8590;
+  border-bottom: 1px solid #7f8590;
   margin-top: 20px;
   padding: 10px 20px 0;
 }
@@ -145,16 +199,15 @@ select {
 .event-details p {
   margin: 0;
 }
-.inline-booker {
+
+.bg-green {
+  /* background-color: var(--primaryGreen); */
   padding: 10px;
-  height: 100%;
-  border: 2px solid var(--primaryBrown);
+  margin-top: 26px;
 }
 .day-details {
-  /* background-color: var(--primaryYellow); */
+  background-color: var(--primaryWhite);
   padding: 0 !important;
-  margin-top: 26px;
-  height: 100%;
 }
 
 .day {
@@ -164,11 +217,23 @@ select {
   height: 80px;
 }
 .day.booked-private {
-  background-color: var(--primaryRed);
+  /* background-color: var(--primaryRed); */
 }
-.day.booked-open {
-  background-color: #cbdddb;
+.day .red-booked-text.booked-private {
+  color: var(--primaryRed);
+  text-align: center;
+  height: 10px;
+  font-size: 0.7em;
 }
+.day .red-booked-text.booked-open {
+  color: var(--primaryGreen);
+  text-align: center;
+  height: 10px;
+  font-size: 0.7em;
+}
+/* .day.booked-open {
+  background-color: var(--primaryYellow);
+} */
 .day > div {
   display: flex;
   flex-direction: column;
@@ -176,7 +241,7 @@ select {
   height: 100%;
 }
 .day .is-chosen {
-  background-color: #1b998b;
+  background-color: var(--primaryLightBlue);
 }
 .day .remove-event,
 .event-details .remove-event {
@@ -203,6 +268,11 @@ select {
   font-size: 9px;
   font-weight: bold;
 }
+.day.booked-private .event-title {
+  font-size: 9px;
+  font-weight: bold;
+}
+
 .day-number {
   margin: -1px;
   font-weight: 700;
@@ -211,7 +281,10 @@ select {
   color: #fff;
 }
 .day-number.today {
-  background-color: var(--primaryYellow);
+  font-size: 0.94em;
+  background-color: var(--bgWhite);
+  color: var(--primaryDarkGrey);
+  border-bottom: 2px solid var(--primaryBlack);
 }
 .event-in-day {
   cursor: pointer;

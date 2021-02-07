@@ -18,7 +18,7 @@ const Month: React.FC = () => {
 
   return (
     <>
-    <Col className="md-6">
+    <Col className="md-3">
       <table>
         <thead>
           <tr className="weekdays">
@@ -33,7 +33,7 @@ const Month: React.FC = () => {
         </thead>
         <tbody>
           {weeks.map((w) => (
-            <Week startDay={w} key={w.toString()} />
+            <Week startDay={w} key={w.toString()+ Math.floor(Math.random() * Math.floor(9999999))} />
           ))}
         </tbody>
       </table>

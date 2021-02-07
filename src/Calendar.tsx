@@ -70,24 +70,36 @@ return (
 <Context.Provider value={{ activeStartDay, setActiveStartDay, activeEndDay, setActiveEndDay, deleteEvent, activeDay, setActiveDay, activeMonth, setActiveMonth, events, setEvents, setShowAddDayEvent, showAddDayEvent, addEventToDb}}>
 
     <Container className="ronnskar-page-container">
+    
+
+      <Row> 
+      {activeDay && showAddDayEvent && <AddEventForm day={activeDay}/>} 
+      </Row>
+      
       <Row>
-          <div className="change-month col">
+        <Col>
+        <h2>Bokning</h2>
+        <p>För att boka, fyll i formuläret. Eller välj dagar i kalendern nedan. I den visas de dagar som är bokade, eller delvis bokade. Lägg gärna till en Beskrivning om ni gör en delvis bokning.</p>
+        </Col>
+      </Row>
+
+      <Row>
+          <Col className="change-month md-3">
           <button onClick={handlePrevMonthClick}> &#60;</button>
           <h1 className={"h4"}>{nameOfMonth}</h1>
           <button onClick={handleNextMonthClick}>&#62;</button>
-        </div>
-      </Row>
-    <Row>
-        {activeMonth && <Month />}
-        <Col className="day-details col-md-6" >
-          {activeDay && <InlineBookingForm day={activeDay} />} 
-          
-          {activeDay && <DayDetails day={activeDay} />}       
         </Col>
-        
-      {activeDay && showAddDayEvent && <AddEventForm day={activeDay}/>} 
+      </Row>
+      <Row>
+        <Col className="md-3 align-self-center" >
+          {activeMonth && <Month />}
+        </Col>
+         <Col className="md-3" >
+          {activeDay && <InlineBookingForm day={activeDay} />}           
+          {activeDay && <DayDetails day={activeDay} />}  
+        </Col>
     </Row>
- 
+     
   </Container>
 </Context.Provider>
   );

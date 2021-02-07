@@ -16,9 +16,9 @@ const Week: React.FC<WeekProps> = ({ startDay }) => {
   });
   return (
     <>
-      <tr className="week">
+      <tr key={Math.floor(Math.random() * Math.floor(9999999))} className="week">
         {eachDayInWeek.map((d) => (
-          <Day day={d} key={d.toString()} />
+          <Day day={d} key={d.toString()+ + Math.floor(Math.random() * Math.floor(9999999))} />
         ))}
       </tr>
     </>

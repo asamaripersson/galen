@@ -8,24 +8,34 @@ const RonnskarPeople: React.FC= () => {
  
   return (
     <>
-   <Container className="ronnskar-page-container">
+      <Container className="ronnskar-page-container">
+        <Row>
+          <h2>Vi på Rönnskär</h2>
+        </Row>
+          <Row>
+          <p>Vilka är alla andra? Åren går och familjer förändras. Vi träffas aällan.
+           Den här sidan är tänkt som en presentation för alla. Vad vill ni att det stå om just er del?
+            Skicka text och ev bilder till  <a href="mailto:asamaripersson@gmail.com">Åsa</a>.
+          </p>
+        </Row>
+        
     <Row>
       <Col className="align-self-start">
-        <FamilyCard owners={"Maud och Camilla"} imageName={"jump.jpg"} bgColor={"brown"}/>
+            <FamilyCard owners={"Maud och Camilla"} imageName={"jump.jpg"} />
       </Col>
 
       <Col className="align-self-end">
-        <FamilyCard owners={"Klas"} imageName={"sunset.jpg"} bgColor={"blue"}/>
+        <FamilyCard owners={"Klas och Bengt"} imageName={"sunset.jpg"}/>
       </Col>
     </Row>
       
     <Row>
       <Col className="align-self-start">
-        <FamilyCard owners={"Östlund"} imageName={"tree.jpg"} bgColor={"red"} />
+        <FamilyCard owners={"Östlund/Jääaro"} imageName={"tree.jpg"} />
       </Col>
 
       <Col className="align-self-end">
-        <FamilyCard owners={"Bengt"} imageName={"adventure.jpg"} bgColor={"green"}/>
+        <FamilyCard owners={"Keno"} imageName={"adventure.jpg"} />
       </Col>
     </Row>
    </Container>

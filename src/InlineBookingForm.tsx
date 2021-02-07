@@ -1,5 +1,5 @@
 import React, { useState, useContext  } from "react";
-import { format, startOfDay, addDays } from "date-fns";
+import { format, isWithinInterval } from "date-fns";
 import svLocale from "date-fns/locale/sv";
 import { useForm } from 'react-hook-form';
 import { Context, DayEvent } from './Context';
@@ -15,13 +15,19 @@ const InlineBookingForm: React.FC<InlineBookingFormPropps> = ({ day }) => {
         return null;
     }
     const { register, handleSubmit } = useForm();
-    const { addEventToDb, activeStartDay, activeEndDay, setActiveEndDay, setShowAddDayEvent } = useContext(Context);
+    const { addEventToDb, activeStartDay, setActiveStartDay, activeEndDay, setActiveEndDay, events } = useContext(Context);
 
+    const privateEvents = events.filter((dayEvent) => { return dayEvent.private });//ta färre. tex detta år?
+    let whithinPrivateEvents = [];
+ 
     const onSubmit = data => {
         //if (!isValid(formErrors)) { return;}
         if (!validateForm(data)) { return; }
         addEventToDb(data);
-        setShowAddDayEvent(false);
+       // setShowAddDayEvent(false);
+        setActiveStartDay(null);
+        setActiveEndDay(null);
+        setTitle("");
     };
 
     const validateForm = (data) => {
@@ -30,24 +36,19 @@ const InlineBookingForm: React.FC<InlineBookingFormPropps> = ({ day }) => {
         validateField("title", data.title);
         validateField("startDate", data.startDate);
         validateField("endDate", data.endDate);
-        return (firstDate <= laststDate && data.title.length >= 2);
+        validateField("whithinPrivateBookings", "");     
+        console.log("valierat ", formErrors.whithinPrivateBookings);
+        //det ska inte gå att fylla i privat om det redan finns halvbokningar
+        return (firstDate <= laststDate && data.title.length >= 1 && formErrors.whithinPrivateBookings == "");
     }
     let isValid = (obj) => Object.entries(obj).reduce((acc, [, value]) => acc && value === "", true);
     
     const [title, setTitle] = useState("");
     let [titleValid, setTitleValid] = useState(false);
-
-    const dateOfDay = activeStartDay ? format(activeStartDay, "yyyy-MM-dd", { locale: svLocale }) : null;
-    let [startDate, setStartDate] = useState(dateOfDay);
-    
     let [startDateValid, setStartDateValid] = useState(false);
-    
-    const dateOfEndDay = activeEndDay ? format(activeEndDay, "yyyy-MM-dd", { locale: svLocale }) : null;
-    
-  let [endDate, setEndDate] = useState(dateOfEndDay);
-  let [endDateValid, setEndDateValid] = useState(false);
-  
-  let [formErrors, setFormErrors] = useState({ title: '', startDate: '', endDate: '' });
+    let [endDateValid, setEndDateValid] = useState(false);
+    let [whithinPrivateEventsValid, setWhithinPrivateEventsValid] = useState(false);
+    let [formErrors, setFormErrors] = useState({ title: '', startDate: '', endDate: '', whithinPrivateBookings:'' });
 
   const handleUserInput = (e) => {
     const name = e.target.name;
@@ -56,37 +57,55 @@ const InlineBookingForm: React.FC<InlineBookingFormPropps> = ({ day }) => {
   }
 
   const validateField= (fieldName, value) => {
-    let fieldValidationErrors = formErrors;
-    let titlenValid = titleValid;
-    let startValid = startDateValid;
-    let endValid = endDateValid;
+      let fieldValidationErrors = formErrors;
+      let whithinPrivateValid = whithinPrivateEventsValid;
+      let titlenValid = titleValid;
+      let startValid = startDateValid;
+      let endValid = endDateValid;
 
       switch (fieldName) {
+          case 'whithinPrivateBookings':
+              if (activeEndDay != null && activeStartDay != null) {
+                     whithinPrivateEvents = privateEvents.filter((dayEvent) => {
+                         return isWithinInterval(new Date(dayEvent.startDate), {
+                             start: activeStartDay, end: activeEndDay
+                         })
+                     });
+                  if (whithinPrivateEvents.length == 0) {
+                      whithinPrivateValid = true;
+                  } else {
+                      whithinPrivateValid = false;
+                  }
+              }
+              fieldValidationErrors.whithinPrivateBookings = whithinPrivateValid ? '' : 'Du har valt dagar som är fullbokade.';
+              break;
           case 'title':
               setTitle(value);
               console.log("i valid field, TITLE", value.length, value);
               titlenValid = value.length >= 1;
               fieldValidationErrors.title = titleValid ? '' : 'Måste fyllas i';
-        break;
+              break;
+          
           case 'startDate':
-              setStartDate(value);
-              startValid = new Date(value) <= new Date(endDate);
+             setActiveStartDay(new Date(value));
+              startValid = new Date(value) <= activeEndDay;
               fieldValidationErrors.startDate = startValid ? '' : 'Ange datum i format åååå-mm-dd';
-              endValid = new Date(endDate) >= new Date(value);
+              endValid = activeEndDay >= new Date(value);
               fieldValidationErrors.endDate = endValid ? '' : 'Ange datum i format åååå-mm-dd';
               break;
           case 'endDate':
-              setEndDate(value);
-              endValid = new Date(value) >= new Date(startDate);
+             setActiveEndDay(new Date (value));
+              endValid = new Date(value) >= new Date(activeStartDay);
               fieldValidationErrors.endDate = endValid ? '' : 'Ange datum i format åååå-mm-dd';
 
-              startValid = new Date(startDate) <= new Date(value);
+              startValid = new Date(activeStartDay) <= new Date(value);
               fieldValidationErrors.startDate = startValid ? '' : 'Ange datum i format åååå-mm-dd';
           default:
               break;
       }
       
       setFormErrors(fieldValidationErrors);
+      setWhithinPrivateEventsValid(whithinPrivateValid);
       setTitleValid(titlenValid);
       setStartDateValid(startValid);
       setEndDateValid(endValid);
@@ -98,39 +117,54 @@ const InlineBookingForm: React.FC<InlineBookingFormPropps> = ({ day }) => {
     
     return <>
         <div className="inline-booker" >
-                <Form onSubmit={handleSubmit(onSubmit)} className={"inline-form"}>        
-                <div className={`form-group ${errorClass(formErrors.startDate)}`}>
-                    <label htmlFor="startDate">Från
-                    <span className={errorClass(formErrors.startDate)}> {formErrors.startDate}</span>
-                    </label>
+            <Form onSubmit={handleSubmit(onSubmit)} className={"inline-form bg-green"}>
+                <div className="row">
+                    <p className={errorClass(formErrors.whithinPrivateBookings)}> {formErrors.whithinPrivateBookings}</p>
+
+                    <div className={`form-group col col-12 col-lg-3  ${errorClass(formErrors.startDate)}`}>
+                    <label className="form-label" htmlFor="startDate">Från </label>
+                        <Form.Control type="date" name="startDate" value={activeStartDay ? format(activeStartDay, "yyyy-MM-dd", { locale: svLocale }) : null} ref={register} onChange={handleUserInput} />
+                        <p className={errorClass(formErrors.startDate)}> {formErrors.startDate}</p>
+                    </div>
+
+                    <div className={`form-group col col-12 col-lg-3 ${errorClass(formErrors.endDate)}`}>
+                        
+                    <label className="" htmlFor="endDate">Till </label>
+                        <Form.Control type="date" name="endDate" value={activeEndDay ? format(activeEndDay, "yyyy-MM-dd", { locale: svLocale }) : null} ref={register} onChange={handleUserInput} />
+                        <p className={errorClass(formErrors.endDate)}> {formErrors.endDate}</p>
+                </div>
+
+                    <div className={`form-group col col-12 col-lg-3 ${errorClass(formErrors.title)}`}>
+                        
+                    <label htmlFor="title">Namn</label>
+                        <Form.Control type="text" name="title" value={title} onChange={handleUserInput} ref={register} />
+                         <p className={errorClass(formErrors.title)}> {formErrors.title}</p>
+                </div>
+            
+                    <div className="form-group col col-12 col-lg-3">
+                        <label htmlFor="description">Beskrivning</label>
+                    <Form.Control as="textarea" name="description" ref={register} />
+                    <p className={errorClass(formErrors.title)}> {formErrors.title}</p>
                     
-                    <Form.Control type="text" name="startDate" defaultValue="åååå-mm-dd" value={dateOfDay} ref={register} onChange={handleUserInput} />
+                    </div>      
                 </div>
-
-                <div className={`form-group ${errorClass(formErrors.endDate)}`}>
-                    <label htmlFor="endDate">Till <span className={errorClass(formErrors.endDate)}> {formErrors.endDate}</span></label>
-                    <Form.Control type="text" name="endDate" defaultValue="åååå-mm-dd" value={dateOfEndDay} ref={register} onChange={handleUserInput} />
-                </div>
-
-                <div className={`form-group ${errorClass(formErrors.title)}`}>
-                    <label htmlFor="title">Titel <span className={errorClass(formErrors.title)}> {formErrors.title}</span></label>
-                    <Form.Control type="text" name="title" defaultValue={title} onChange={handleUserInput} ref={register} />
-                </div>
-            
-                <div>
-                <label htmlFor="description">Beskrivning</label>
-                <Form.Control as="textarea" name="description" ref={register}/>
-                </div>
-            
-                <div>                    
-                    <Form.Check 
+                <div className="row">
+                    <div className="form-group col col-12 col-lg-4"> 
+                        <Form.Check 
                         type={"checkbox"}
                         label={`Vill ni ha hela ön för er själva? `}
                         ref={register}
                         name={'private'}
-                    />
+                        />
+                    </div>
                 </div>
-                <Button type="submit">Submit</Button>
+                
+                <div className="row">
+                    <div className="form-group col col-12 col-lg-3">
+                    <Button disabled = {activeStartDay == null || setActiveEndDay == null || title == ""} type="submit">Submit</Button>
+                    </div>
+                </div>
+                
             </Form>
         </div>  
     </>
